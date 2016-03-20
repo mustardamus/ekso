@@ -1,0 +1,21 @@
+{
+  "name": "ekso",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha test/test.js",
+    "lint": "standard lib/**/*.js test/**/.js"
+  },
+  "author": "Sebastian Senf <contact@mustardamus.com>",
+  "license": "MIT",
+  "dependencies": {
+    "coffee-script": "^1.10.0",
+    "globby": "^4.0.0",
+    "lodash": "^4.6.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5",
+    "standard": "^6.0.8"
+  }
+}
