@@ -31,5 +31,7 @@ describe('path definition by string', () => {
 
   it('should process deep directories', () => {
     assert.equal(obj.deep.directory.boolean, true)
+    assert.equal(obj.deep.directory.works.object.works, true)
+    assert.equal(obj.deep.directory.works.array[0], true)
   })
 })
