@@ -21,6 +21,7 @@ describe('path definition by string', () => {
   it('should process string declaration', () => {
     assert.equal(obj.byString.boolean, true)
     assert.equal(obj.byString.object.works, true)
+    assert.equal(obj.byString.array[0], true)
     assert.equal(obj.byString.function(), true)
   })
 
