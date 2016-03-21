@@ -44,4 +44,12 @@ describe('entire directory', () => {
   it('should process string declaration', () => {
     assert.equal(obj.byString.boolean, true)
   })
+
+  it('should process coffee script files', () => {
+    assert.equal(obj.coffeeScript.boolean, true)
+  })
+
+  it('should process deep directories', () => {
+    assert.equal(obj.deep.directory.boolean, true)
+  })
 })
