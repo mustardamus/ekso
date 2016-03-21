@@ -20,6 +20,8 @@ describe('path definition by string', () => {
 
   it('should process string declaration', () => {
     assert.equal(obj.byString.boolean, true)
+    assert.equal(obj.byString.object.works, true)
+    assert.equal(obj.byString.function(), true)
   })
 
   it('should process coffee script files', () => {
