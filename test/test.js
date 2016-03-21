@@ -9,25 +9,24 @@ describe('initilization', () => {
   })
 })
 
+describe('path definition by string', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs'
+  }, [
+    'byString',
+    'coffeeScript',
+    'deep/directory'
+  ])
 
-ekso({
-  rootDir: __dirname + '/dirs'
-}, [
-  'byString',
-  'coffeeScript',
-  {
-    path: 'controllers',
-    postfix: 'Controller',
-    nameTransform: ['capitalize']
-  }
-])
-
-describe('global variables', () => {
   it('should process string declaration', () => {
-    assert.equal(byString.boolean, true)
+    assert.equal(obj.byString.boolean, true)
   })
 
   it('should process coffee script files', () => {
-    assert.equal(coffeeScript.boolean, true)
+    assert.equal(obj.coffeeScript.boolean, true)
+  })
+
+  it('should process deep directories', () => {
+    assert.equal(obj.deep.directory.boolean, true)
   })
 })
