@@ -35,3 +35,13 @@ describe('path definition by string', () => {
     assert.equal(obj.deep.directory.works.array[0], true)
   })
 })
+
+describe('entire directory', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs'
+  })
+
+  it('should process string declaration', () => {
+    assert.equal(obj.byString.boolean, true)
+  })
+})
