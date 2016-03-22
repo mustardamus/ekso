@@ -36,7 +36,7 @@ describe('path definition by string', () => {
   })
 })
 
-describe('entire directory', () => {
+describe('entire directory with set rootDir', () => {
   let obj = ekso({
     rootDir: __dirname + '/dirs'
   })
@@ -51,5 +51,17 @@ describe('entire directory', () => {
 
   it('should process deep directories', () => {
     assert.equal(obj.deep.directory.boolean, true)
+  })
+})
+
+describe('entire working directory without options or dirs', () => {
+  let obj = ekso()
+
+  it('should have excluded node_modules by default', () => {
+    assert.equal(typeof obj['node_modules'], 'undefined')
+  })
+
+  it('should have required the test boolean', () => {
+    assert.equal(obj.test.dirs.deep.directory.boolean, true)
   })
 })
