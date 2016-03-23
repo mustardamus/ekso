@@ -22,7 +22,7 @@ describe('path definition by string', () => {
     assert.equal(obj.byString.boolean, true)
     assert.equal(obj.byString.object.works, true)
     assert.equal(obj.byString.array[0], true)
-    assert.equal(obj.byString.function(), true)
+    assert.equal(obj.byString.function(true)[0], true)
   })
 
   it('should process coffee script files', () => {
@@ -33,6 +33,7 @@ describe('path definition by string', () => {
     assert.equal(obj.deep.directory.boolean, true)
     assert.equal(obj.deep.directory.works.object.works, true)
     assert.equal(obj.deep.directory.works.array[0], true)
+    assert.equal(obj.deep.directory.works.function(true)[0], true)
   })
 })
 
@@ -63,5 +64,24 @@ describe('entire working directory without options or dirs', () => {
 
   it('should have required the test boolean', () => {
     assert.equal(obj.test.dirs.deep.directory.boolean, true)
+  })
+})
+
+describe('handling all functions', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs',
+    executeFuncs: true,
+    funcArgs: [true, true],
+    funcContext: true
+  })
+
+  it('should execute all functions with given arguments', () => {
+    assert.equal(obj.byString.function[0], true)
+    assert.equal(obj.deep.directory.works.function[0], true)
+  })
+
+  it('should have the given context', () => {
+    assert.equal(obj.byString.function[2], true)
+    assert.equal(obj.deep.directory.works.function[2], true)
   })
 })
