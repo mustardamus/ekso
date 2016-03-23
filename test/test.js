@@ -85,3 +85,52 @@ describe('handling all functions', () => {
     assert.equal(obj.deep.directory.works.function[2], true)
   })
 })
+
+describe('path definitions by objects', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs'
+  }, [
+    { path: 'byString' },
+    { path: 'coffeeScript' },
+    { path: 'deep/directory' }
+  ])
+
+  it('should process path declaration', () => {
+    assert.equal(obj.byString.boolean, true)
+  })
+
+  it('should process coffee script files', () => {
+    assert.equal(obj.coffeeScript.boolean, true)
+  })
+
+  it('should process deep directories', () => {
+    assert.equal(obj.deep.directory.boolean, true)
+  })
+})
+
+describe('path definition by object with executed functions', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs'
+  }, [
+    { path: 'byString' },
+    {
+      path: 'deep/directory',
+      executeFuncs: true,
+      funcArgs: [true, true],
+      funcContext: true
+    }
+  ])
+
+  it('should not have executed the functions if option not set', () => {
+    assert.equal(obj.byString.function(true)[0], true)
+  })
+
+  it('should have executed functions with args if option set', () => {
+    assert.equal(obj.deep.directory.works.function[0], true)
+  })
+
+  it('should have the given context if option set', () => {
+    assert.equal(typeof obj.byString.function[2], 'undefined')
+    assert.equal(obj.deep.directory.works.function[2], true)
+  })
+})
