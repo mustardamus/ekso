@@ -142,6 +142,7 @@ describe('path definition by object with global name transforms', () => {
   })
 
   it('should process multiple transforms on the name', () => {
+    assert.equal(obj.snake_case.SNAKE_CASE, true)
     assert.equal(obj.camelCase.CAMEL_CASE, true)
   })
 })
