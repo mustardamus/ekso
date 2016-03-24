@@ -134,3 +134,14 @@ describe('path definition by object with executed functions', () => {
     assert.equal(obj.deep.directory.works.function[2], true)
   })
 })
+
+describe('path definition by object with global name transforms', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms',
+    nameTransforms: ['snakeCase', 'upperCase']
+  })
+
+  it('should process multiple transforms on the name', () => {
+    assert.equal(obj.camelCase.CAMEL_CASE, true)
+  })
+})
