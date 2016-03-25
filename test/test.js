@@ -146,3 +146,16 @@ describe('global name transforms', () => {
     assert.equal(obj.camelCase.CAMEL_CASE, true)
   })
 })
+
+describe('global path transforms', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms',
+    pathTransforms: ['snakeCase', 'upperCase']
+  })
+
+  it('should process multiple transforms on the path', () => {
+    assert.equal(obj.SNAKE_CASE.snake_case, true)
+    assert.equal(obj.CAMEL_CASE.camelCase, true)
+    assert.equal(obj.SNAKE_CASE.CAMEL_CASE.camelCase, true)
+  })
+})
