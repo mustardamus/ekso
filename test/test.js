@@ -135,7 +135,7 @@ describe('path definition by object with executed functions', () => {
   })
 })
 
-describe('path definition by object with global name transforms', () => {
+describe('global name transforms', () => {
   let obj = ekso({
     rootDir: __dirname + '/dirs/transforms',
     nameTransforms: ['snakeCase', 'upperCase']
