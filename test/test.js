@@ -171,8 +171,48 @@ describe('local name transforms', () => {
     {
       path: 'snake_case',
       nameTransforms: ['camelCase']
+    },
+    {
+      path: 'lowercase',
+      nameTransforms: ['upperCase']
+    },
+    {
+      path: 'UPPERCASE',
+      nameTransforms: ['lowerCase']
+    },
+    {
+      path: 'kebab-case',
+      nameTransforms: ['capitalize']
+    },
+    {
+      path: 'justAnotherTest',
+      nameTransforms: ['kebabCase']
     }
   ])
+
+  it('should process snakeCase in combination with upperCase', () => {
+    assert.equal(obj.camelCase.CAMEL_CASE, true)
+  })
+
+  it('should process camelCase', () => {
+    assert.equal(obj.snake_case.snakeCase, true)
+  })
+
+  it('should process upperCase', () => {
+    assert.equal(obj.lowercase.LOWERCASE, true)
+  })
+
+  it('should process lowerCase', () => {
+    assert.equal(obj.UPPERCASE.uppercase, true)
+  })
+
+  it('should process capitalize', () => {
+    assert.equal(obj['kebab-case']['Kebab-case'], true)
+  })
+
+  it('should process kebabCase', () => {
+    assert.equal(obj.justAnotherTest['just-another-test'], true)
+  })
 })
 
 describe('combined global and local name transforms', () => {
