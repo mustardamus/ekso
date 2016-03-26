@@ -315,3 +315,43 @@ describe('global name postfix', () => {
     assert.equal(obj.snake_case.camelCase.camelCasepostfix, true)
   })
 })
+
+describe('local name prefix and postfix', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms'
+  }, [
+    {
+      path: 'camelCase'
+    },
+    {
+      path: 'snake_case',
+      namePrefix: 'prefix'
+    },
+    {
+      path: 'justAnotherTest',
+      namePostfix: 'postfix'
+    },
+    {
+      path: 'lowercase',
+      namePrefix: 'prefix',
+      namePostfix: 'postfix'
+    }
+  ])
+
+  it('should not prefix or postfix if not set', () => {
+    assert.equal(obj.camelCase.camelCase, true)
+  })
+
+  it('should have prefixed', () => {
+    assert.equal(obj.snake_case.prefixsnake_case, true)
+    assert.equal(obj.snake_case.camelCase.prefixcamelCase, true)
+  })
+
+  it('should have postfixed', () => {
+    assert.equal(obj.justAnotherTest.justAnotherTestpostfix, true)
+  })
+
+  it('should have prefixed and postfixed', () => {
+    assert.equal(obj.lowercase.prefixlowercasepostfix, true)
+  })
+})
