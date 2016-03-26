@@ -147,19 +147,6 @@ describe('global name transforms', () => {
   })
 })
 
-describe('global path transforms', () => {
-  let obj = ekso({
-    rootDir: __dirname + '/dirs/transforms',
-    pathTransforms: ['snakeCase', 'upperCase']
-  })
-
-  it('should process multiple transforms on the path', () => {
-    assert.equal(obj.SNAKE_CASE.snake_case, true)
-    assert.equal(obj.CAMEL_CASE.camelCase, true)
-    assert.equal(obj.SNAKE_CASE.CAMEL_CASE.camelCase, true)
-  })
-})
-
 describe('local name transforms', () => {
   let obj = ekso({
     rootDir: __dirname + '/dirs/transforms'
@@ -235,5 +222,72 @@ describe('combined global and local name transforms', () => {
 
   it('should have processed the local name transform on top', () => {
     assert.equal(obj.camelCase.CAMELCASE, true)
+  })
+})
+
+describe('global path transforms', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms',
+    pathTransforms: ['snakeCase', 'upperCase']
+  })
+
+  it('should process multiple transforms on the path', () => {
+    assert.equal(obj.SNAKE_CASE.snake_case, true)
+    assert.equal(obj.CAMEL_CASE.camelCase, true)
+    assert.equal(obj.SNAKE_CASE.CAMEL_CASE.camelCase, true)
+  })
+})
+
+describe('local path transforms', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms'
+  }, [
+    {
+      path: 'kebab-case'
+    },
+    {
+      path: 'camelCase',
+      pathTransforms: ['snakeCase', 'upperCase']
+    },
+    {
+      path: 'snake_case',
+      pathTransforms: ['camelCase']
+    }
+  ])
+
+  it('shouldnt transform if no local path transforms are set', () => {
+    assert.equal(obj['kebab-case']['kebab-case'], true)
+  })
+
+  it('should have have transformed in combination', () => {
+    assert.equal(obj.CAMEL_CASE.camelCase, true)
+  })
+
+  it('should have transformed deeper paths', () => {
+    assert.equal(obj.snakeCase.snake_case, true)
+    assert.equal(obj.snakeCase.camelCase.camelCase, true)
+  })
+})
+
+describe('combined global and local path transforms', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms',
+    pathTransforms: ['camelCase']
+  }, [
+    {
+      path: 'snake_case'
+    },
+    {
+      path: 'camelCase',
+      pathTransforms: ['upperCase']
+    }
+  ])
+
+  it('should have processed the global path transform', () => {
+    assert.equal(obj.snakeCase.snake_case, true)
+  })
+
+  it('should have processed the local path transform on top', () => {
+    assert.equal(obj.CAMELCASE.camelCase, true)
   })
 })
