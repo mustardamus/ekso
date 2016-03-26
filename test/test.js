@@ -218,6 +218,22 @@ describe('local name transforms', () => {
 describe('combined global and local name transforms', () => {
   let obj = ekso({
     rootDir: __dirname + '/dirs/transforms',
-    pathTransforms: ['snakeCase', 'upperCase']
+    nameTransforms: ['camelCase']
+  }, [
+    {
+      path: 'snake_case'
+    },
+    {
+      path: 'camelCase',
+      nameTransforms: ['upperCase']
+    }
+  ])
+
+  it('should have processed the global name transform', () => {
+    assert.equal(obj.snake_case.snakeCase, true)
+  })
+
+  it('should have processed the local name transform on top', () => {
+    assert.equal(obj.camelCase.CAMELCASE, true)
   })
 })
