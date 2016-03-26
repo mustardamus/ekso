@@ -291,3 +291,27 @@ describe('combined global and local path transforms', () => {
     assert.equal(obj.CAMELCASE.camelCase, true)
   })
 })
+
+describe('global name prefix', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms',
+    namePrefix: 'prefix'
+  })
+
+  it('should have added the prefix to name', () => {
+    assert.equal(obj.camelCase.prefixcamelCase, true)
+    assert.equal(obj.snake_case.camelCase.prefixcamelCase, true)
+  })
+})
+
+describe('global name postfix', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms',
+    namePostfix: 'postfix'
+  })
+
+  it('should have added the postfix to name', () => {
+    assert.equal(obj.camelCase.camelCasepostfix, true)
+    assert.equal(obj.snake_case.camelCase.camelCasepostfix, true)
+  })
+})
