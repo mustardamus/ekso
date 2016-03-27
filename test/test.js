@@ -467,3 +467,18 @@ describe('combination of global and local path prefix and postfix', () => {
     assert.equal(obj.globalPrefixsnake_caselocal_postfix.snake_case, true)
   })
 })
+
+describe('global option to make object global', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs',
+    global: true
+  })
+
+  it('should have returned an object like normal', () => {
+    assert.equal(obj.byString.boolean, true)
+  })
+
+  it('should have made the object global', () => {
+    assert.equal(byString.boolean, true)
+  })
+})
