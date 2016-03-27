@@ -489,3 +489,30 @@ describe('global option to make object global', () => {
     assert.equal(deep.directory.works.function(true)[0], true)
   })
 })
+
+describe('last part of the path to be global', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs',
+    globalLast: true
+  }, [
+    {
+      path: 'deep',
+      namePrefix: 'X'
+    }
+  ])
+
+  after(() => {
+    global.Xboolean = undefined
+    global.Xfunction = undefined
+  })
+
+  it('should have returned an object like normal', () => {
+    assert.equal(obj.deep.directory.Xboolean, true)
+    assert.equal(obj.deep.directory.works.Xfunction(true)[0], true)
+  })
+
+  it('should have made the last part of the path global', () => {
+    assert.equal(Xboolean, true)
+    assert.equal(Xfunction(true)[0], true)
+  })
+})
