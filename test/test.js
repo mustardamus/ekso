@@ -355,3 +355,27 @@ describe('local name prefix and postfix', () => {
     assert.equal(obj.lowercase.prefixlowercasepostfix, true)
   })
 })
+
+describe('combination of global and local prefix and postfix', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms',
+    namePrefix: 'globalPrefix'
+  }, [
+    {
+      path: 'camelCase',
+      namePrefix: 'localPrefix'
+    },
+    {
+      path: 'snake_case',
+      namePostfix: 'local_postfix'
+    }
+  ])
+
+  it('should have overwritten the global with the local prefix', () => {
+    assert.equal(obj.camelCase.localPrefixcamelCase, true)
+  })
+
+  it('should have gloabl prefix and local postfix', () => {
+    assert.equal(obj.snake_case.globalPrefixsnake_caselocal_postfix, true)
+  })
+})
