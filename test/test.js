@@ -356,7 +356,7 @@ describe('local name prefix and postfix', () => {
   })
 })
 
-describe('combination of global and local prefix and postfix', () => {
+describe('combination of global and local name prefix and postfix', () => {
   let obj = ekso({
     rootDir: __dirname + '/dirs/transforms',
     namePrefix: 'globalPrefix'
@@ -401,5 +401,69 @@ describe('global path postfix', () => {
   it('should have added the postfix to path parts', () => {
     assert.equal(obj.camelCasepostfix.camelCase, true)
     assert.equal(obj.snake_casepostfix.camelCasepostfix.camelCase, true)
+  })
+})
+
+describe('local path prefix and postfix', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms'
+  }, [
+    {
+      path: 'camelCase'
+    },
+    {
+      path: 'snake_case',
+      pathPrefix: 'prefix'
+    },
+    {
+      path: 'justAnotherTest',
+      pathPostfix: 'postfix'
+    },
+    {
+      path: 'lowercase',
+      pathPrefix: 'prefix',
+      pathPostfix: 'postfix'
+    }
+  ])
+
+  it('should not prefix or postfix if not set', () => {
+    assert.equal(obj.camelCase.camelCase, true)
+  })
+
+  it('should have prefixed', () => {
+    assert.equal(obj.prefixsnake_case.snake_case, true)
+    assert.equal(obj.prefixsnake_case.prefixcamelCase.camelCase, true)
+  })
+
+  it('should have postfixed', () => {
+    assert.equal(obj.justAnotherTestpostfix.justAnotherTest, true)
+  })
+
+  it('should have prefixed and postfixed', () => {
+    assert.equal(obj.prefixlowercasepostfix.lowercase, true)
+  })
+})
+
+describe('combination of global and local path prefix and postfix', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/transforms',
+    pathPrefix: 'globalPrefix'
+  }, [
+    {
+      path: 'camelCase',
+      pathPrefix: 'localPrefix'
+    },
+    {
+      path: 'snake_case',
+      pathPostfix: 'local_postfix'
+    }
+  ])
+
+  it('should have overwritten the global with the local prefix', () => {
+    assert.equal(obj.localPrefixcamelCase.camelCase, true)
+  })
+
+  it('should have gloabl prefix and local postfix', () => {
+    assert.equal(obj.globalPrefixsnake_caselocal_postfix.snake_case, true)
   })
 })
