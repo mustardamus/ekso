@@ -474,11 +474,18 @@ describe('global option to make object global', () => {
     global: true
   })
 
+  after(() => {
+    global.byString = undefined
+    global.deep = undefined
+  })
+
   it('should have returned an object like normal', () => {
     assert.equal(obj.byString.boolean, true)
+    assert.equal(obj.deep.directory.works.function(true)[0], true)
   })
 
   it('should have made the object global', () => {
     assert.equal(byString.boolean, true)
+    assert.equal(deep.directory.works.function(true)[0], true)
   })
 })
