@@ -470,49 +470,56 @@ describe('combination of global and local path prefix and postfix', () => {
 
 describe('global option to make object global', () => {
   let obj = ekso({
-    rootDir: __dirname + '/dirs',
+    rootDir: __dirname + '/dirs/transforms/justAnotherTest',
     global: true
   })
 
-  after(() => {
-    global.byString = undefined
-    global.deep = undefined
-  })
-
   it('should have returned an object like normal', () => {
-    assert.equal(obj.byString.boolean, true)
-    assert.equal(obj.deep.directory.works.function(true)[0], true)
+    assert.equal(obj.justAnotherTest, true)
   })
 
   it('should have made the object global', () => {
-    assert.equal(byString.boolean, true)
-    assert.equal(deep.directory.works.function(true)[0], true)
+    assert.equal(justAnotherTest, true)
   })
 })
 
 describe('last part of the path to be global', () => {
   let obj = ekso({
-    rootDir: __dirname + '/dirs',
+    rootDir: __dirname + '/dirs/transforms/snake_case',
     globalLast: true
-  }, [
-    {
-      path: 'deep',
-      namePrefix: 'X'
-    }
-  ])
-
-  after(() => {
-    global.Xboolean = undefined
-    global.Xfunction = undefined
   })
 
   it('should have returned an object like normal', () => {
-    assert.equal(obj.deep.directory.Xboolean, true)
-    assert.equal(obj.deep.directory.works.Xfunction(true)[0], true)
+    assert.equal(obj.snake_case, true)
+    assert.equal(obj.camelCase.camelCase, true)
   })
 
   it('should have made the last part of the path global', () => {
-    assert.equal(Xboolean, true)
-    assert.equal(Xfunction(true)[0], true)
+    assert.equal(snake_case, true)
+    assert.equal(camelCase, true)
+  })
+})
+
+describe('global object by local definition', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs'
+  }, [
+    {
+      path: 'byString'
+    },
+    {
+      path: 'deep',
+      global: true
+    }
+  ])
+
+  it('should not been global if no option is set', () =>{
+    assert.equal(obj.byString.boolean, true)
+    assert.equal(typeof byString, 'undefined')
+  })
+
+  it('should been global if option is set', () => {
+    assert.equal(deep.directory.boolean, true)
+    assert.equal(deep.directory.works.function(true)[0], true)
   })
 })
