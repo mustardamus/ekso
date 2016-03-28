@@ -546,3 +546,19 @@ describe('global last part of path by local definition', () => {
     assert.equal(lowercase, true)
   })
 })
+
+describe('global option for global objects by require', () => {
+  let obj = ekso({
+    globalRequire: {
+      _: 'lodash',
+      fs: 'fs'
+    }
+  })
+
+  it('should have requires it globally', () => {
+    assert.equal(typeof _, 'function')
+    assert.equal(typeof fs, 'object')
+    assert.equal(typeof _.toUpper, 'function')
+    assert.equal(typeof fs.readFile, 'function')
+  })
+})
