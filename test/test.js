@@ -523,3 +523,26 @@ describe('global object by local definition', () => {
     assert.equal(deep.directory.works.function(true)[0], true)
   })
 })
+
+describe('global last part of path by local definition', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs'
+  }, [
+    {
+      path: 'byString'
+    },
+    {
+      path: 'transforms/lowercase',
+      globalLast: true
+    }
+  ])
+
+  it('should not been global last part of path if no option is set', () =>{
+    assert.equal(obj.byString.boolean, true)
+    assert.equal(typeof byString, 'undefined')
+  })
+
+  it('should been global last part of path if option is set', () => {
+    assert.equal(lowercase, true)
+  })
+})
