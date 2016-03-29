@@ -15,7 +15,8 @@ describe('path definition by string', () => {
   }, [
     'byString',
     'coffeeScript',
-    'deep/directory'
+    'deep/directory',
+    'byFile.js'
   ])
 
   it('should process string declaration', () => {
@@ -35,6 +36,10 @@ describe('path definition by string', () => {
     assert.equal(obj.deep.directory.works.array[0], true)
     assert.equal(obj.deep.directory.works.function(true)[0], true)
   })
+
+  it('should process files directly', () => {
+    assert.equal(obj.byFile, true)
+  })
 })
 
 describe('entire directory with set rootDir', () => {
@@ -52,6 +57,10 @@ describe('entire directory with set rootDir', () => {
 
   it('should process deep directories', () => {
     assert.equal(obj.deep.directory.boolean, true)
+  })
+
+  it('should process files directly', () => {
+    assert.equal(obj.byFile, true)
   })
 })
 
@@ -92,7 +101,8 @@ describe('path definitions by objects', () => {
   }, [
     { path: 'byString' },
     { path: 'coffeeScript' },
-    { path: 'deep/directory' }
+    { path: 'deep/directory' },
+    { path: 'byFile.js' }
   ])
 
   it('should process path declaration', () => {
@@ -105,6 +115,10 @@ describe('path definitions by objects', () => {
 
   it('should process deep directories', () => {
     assert.equal(obj.deep.directory.boolean, true)
+  })
+
+  it('should process files directly', () => {
+    assert.equal(obj.byFile, true)
   })
 })
 
