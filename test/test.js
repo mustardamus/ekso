@@ -374,27 +374,37 @@ describe('local name prefix and postfix', () => {
   })
 })
 
-describe('combination of global and local name prefix and postfix', () => {
+describe('overwrite global with local name prefix and postfix', () => {
   let obj = ekso({
     rootDir: __dirname + '/dirs/transforms',
-    namePrefix: 'globalPrefix'
+    namePrefix: '_globalPrefix_',
+    namePostfix: '_globalPostfix_'
   }, [
     {
       path: 'camelCase',
-      namePrefix: 'localPrefix'
+      namePrefix: '_localPrefix_'
     },
     {
       path: 'snake_case',
-      namePostfix: 'local_postfix'
-    }
+      namePostfix: '_localPostfix_'
+    },
+    {
+      path: 'lowercase',
+      namePrefix: '_localPrefix_',
+      namePostfix: '_localPostfix_'
+    },
   ])
 
   it('should have overwritten the global with the local prefix', () => {
-    assert.equal(obj.camelCase.localPrefixcamelCase, true)
+    assert.equal(obj.camelCase._localPrefix_camelCase_globalPostfix_, true)
   })
 
-  it('should have gloabl prefix and local postfix', () => {
-    assert.equal(obj.snake_case.globalPrefixsnake_caselocal_postfix, true)
+  it('should have overwritten the global with the local postfix', () => {
+    assert.equal(obj.snake_case._globalPrefix_snake_case_localPostfix_, true)
+  })
+
+  it('should have overwritten the global with the local prefix and postfix', () => {
+    assert.equal(obj.lowercase._localPrefix_lowercase_localPostfix_, true)
   })
 })
 
