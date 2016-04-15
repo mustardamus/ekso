@@ -589,8 +589,32 @@ describe('global object by local definition', () => {
   })
 })
 
-describe('overwrite global global option with local', () => {})
-describe('overwrite global last global option with local', () => {})
+describe('overwrite global global option with local', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs/global1',
+    global: true
+  }, [
+    {
+      path: 'test1'
+    },
+    {
+      path: 'test2',
+      global: false
+    }
+  ])
+
+  it('should have set the global object', () => {
+    assert.equal(test1.test1, true)
+  })
+
+  it('should have not set the global object if overwritten b y local option', () => {
+    assert.equal(typeof test2, 'undefined')
+  })
+})
+
+describe('overwrite global last global option with local', () => {
+
+})
 
 describe('global last part of path by local definition', () => {
   let obj = ekso({
