@@ -287,26 +287,26 @@ describe('local path transforms', () => {
   })
 })
 
-describe('combined global and local path transforms', () => {
+describe('overwrite global with local path transforms', () => {
   let obj = ekso({
     rootDir: __dirname + '/dirs/transforms',
-    pathTransforms: ['camelCase']
+    pathTransforms: ['upperCase']
   }, [
     {
       path: 'snake_case'
     },
     {
       path: 'camelCase',
-      pathTransforms: ['upperCase']
+      pathTransforms: ['kebabCase']
     }
   ])
 
   it('should have processed the global path transform', () => {
-    assert.equal(obj.snakeCase.snake_case, true)
+    assert.equal(obj.SNAKE_CASE.snake_case, true)
   })
 
-  it('should have processed the local path transform on top', () => {
-    assert.equal(obj.CAMELCASE.camelCase, true)
+  it('should have overwritten with the local path transform', () => {
+    assert.equal(obj['camel-case'].camelCase, true)
   })
 })
 
