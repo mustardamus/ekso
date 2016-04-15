@@ -150,7 +150,34 @@ describe('path definition by object with executed functions', () => {
 })
 
 describe('overwrite global function options with locals', () => {
+  let obj = ekso({
+    rootDir: __dirname + '/dirs',
+    executeFuncs: true,
+    funcArgs: ['global', 'global'],
+    funcContext: 'global'
+  }, [
+    {
+      path: 'byString',
+      funcArgs: ['local', 'local'],
+      funcContext: 'local'
+    },
+    {
+      path: 'deep',
+      executeFuncs: false
+    }
+  ])
 
+  it('should overwrite funcArgs', () => {
+    assert.equal(obj.byString.function[0], 'local')
+  })
+
+  it('should overwrite funcContext', () => {
+    assert.equal(obj.byString.function[2], 'local')
+  })
+
+  it('should not executed function', () => {
+    assert.equal(typeof obj.deep.directory.works.function, 'function')
+  })
 })
 
 describe('global name transforms', () => {
@@ -561,6 +588,9 @@ describe('global object by local definition', () => {
     assert.equal(deep.directory.works.function(true)[0], true)
   })
 })
+
+describe('overwrite global global option with local', () => {})
+describe('overwrite global last global option with local', () => {})
 
 describe('global last part of path by local definition', () => {
   let obj = ekso({
