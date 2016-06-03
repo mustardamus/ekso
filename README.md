@@ -43,4 +43,4 @@ Ekso has full test coverage which also acts as documentation
 * [overwrite global global option with local](test/test.js#L592)
 * [global last part of path by local definition](test/test.js#L615)
 * [overwrite global last global option with local](test/test.js#L638)
-* [global option for global objects by require](test/test.js#L661)
+* [global option for global objects by require](test/test.js#L661)n
