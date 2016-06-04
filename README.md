@@ -1,8 +1,8 @@
 # Ekso
 
 Ekso is a little utility to `require` entire directory structures, modify the
-naming and initilization, and spit out a `Object` for further usage. It supports
-CoffeeScript out of the box.
+naming and initilization, and spit out an `Object` for further usage. It
+supports CoffeeScript out of the box.
 
 It was developed exclusively while riding buses in Italy and Spain. Dude needs
 something better to do than watching those stupid shows, right?
@@ -23,14 +23,14 @@ entire working directory (`process.cwd()`) and ignores the directory
 
 If the first parameter is an `Object`, it will be treated as global options.
 Without any following parameter the whole directory (`rootDir` option) is
-`require`d:
+required:
 
     const App = ekso({
       rootDir: __dirname
     })
 
-If the first or second parameter is an `Array` (consisting of `String`s or
-`Object`s), it will be treated as paths and/or options for specific directories
+If the first or second parameter is an `Array` (consisting of `String`'s or
+`Object`'s), it will be treated as paths and/or options for specific directories
 to `require`, relative to the `rootDir`:
 
     const App = ekso({
@@ -48,5 +48,62 @@ Or:
     const App = ekso([
       'examples/mvc/config',
       'examples/mvc/models',
-      'examples/mvc/collections'
+      'examples/mvc/controllers'
     ])
+
+## Overwriting Global Options with Local Options
+
+There are various options to modify how directories and files are required
+([see section below](#local-options)).
+
+If you pass them as Global Options they will apply to every directory and file
+that is required:
+
+    const App = ekso({
+      nameTransforms: ['upperCase']   // transform every name to upperCase
+    }, [
+      'examples/mvc/config',          // names will be upperCase
+      'examples/mvc/models'           // names will be upperCase
+    ])
+
+However, you can overwrite Global Options with Local Options if you pass the
+path definitions as `Object`'s:
+
+    const App = ekso({
+      nameTransforms: ['upperCase']   // transform every name to upperCase
+    }, [
+      'examples/mvc/config',          // names will be upperCase
+      {
+        path: 'examples/mvc/models',
+        nameTransforms: ['kebabCase'] // names will be kebabCase instead of upperCase
+      }
+    ])
+
+## Global Options
+
+These options can only be used in the global context, ie the first parameter you
+pass to `ekso`, which is an `Object`.
+
+### rootDir (`String`)
+
+Default: `process.cwd()`. The path of the root directory. Without any further
+path definitions the whole directory is required. If you specify paths, then
+they are relative to the root directory.
+
+### excludeDirs (`Array`)
+
+Default: `['node_modules']`. Directories in this `Array` will not be processed,
+either you `require` the whole root directory or specific paths.
+
+### globalRequire (`Object`)
+
+Default: `{}`. This will globally require every value in the `Object` as the key
+name. This happens before paths are processed, so globally required modules will
+be accessible in every file. Define it like so:
+
+    const App = ekso({
+      globalRequire: {
+        _: 'lodash',
+        express: 'express'
+      }
+    })
