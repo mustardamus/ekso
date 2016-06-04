@@ -4,7 +4,10 @@ const ekso = require('../../lib')
 
 const App = ekso({
   rootDir: __dirname,                 // set root directory to this scripts directory
-  pathTransforms: ['capitalize']      // capitalize all paths
+  pathTransforms: ['capitalize'],     // capitalize all paths
+  globalRequire: {                    // globally require the following modules
+    _: 'lodash'                       // lodash as _
+  }
 }, [
   {
     path: 'config',                   // require whole config directory
