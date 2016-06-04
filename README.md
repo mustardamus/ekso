@@ -107,3 +107,87 @@ be accessible in every file. Define it like so:
         express: 'express'
       }
     })
+
+## Local Options
+
+These options either can be used as Global Options to apply to every processed
+path, or as Local Option to be used only on specific paths.
+
+### executeFuncs (`Boolean`)
+
+Default: `false`. If a `Function` is exported, execute it. For example:
+
+    module.exports = function () {
+      console.log('one time initialized')
+    }
+
+### funcArgs (`Array`)
+
+Default: `[]`. If a `Function` is exported, and the `executeFuncs` option is set
+to `true`, pass the given `Array` as arguments. For example:
+
+    const App = ekso([
+      {
+        path: 'examples/mvc/models',
+        executeFuncs: true,
+        funcArgs: ['one', 'two']
+      }
+    ])
+
+And a example model file:
+
+    module.exports = function (arg1, arg2) {
+      console.log(arg1, arg2)  // 'one', 'two'
+    }
+
+### funcContext (`Mixed`)
+
+Default: `false`. This option will set the context for a executed function. You
+can set it to whatever, a `String`, `Function`, etc. It will be available to the
+executed function as `this`. For example:
+
+    const App = ekso([
+      {
+        path: 'examples/mvc/models',
+        executeFuncs: true,
+        funcContext: 'that'
+      }
+    ])
+
+And a example model file:
+
+    module.exports = function () {
+      console.log(this)  // 'that'
+    }
+
+### nameTransforms (`Array`)
+
+Default: `[]`.
+
+### pathTransforms (`Array`)
+
+Default: `[]`.
+
+### namePrefix (`String`)
+
+Default: ''''.
+
+### namePostfix (`String`)
+
+Default: `''`.
+
+### pathPrefix (`String`)
+
+Default: `''`.
+
+### pathPostfix (`String`)
+
+Default: `''`.
+
+### global (`Boolean`)
+
+Default: `false`.
+
+### globalLast (`Boolean`)
+
+Default: `false`.
