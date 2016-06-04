@@ -142,9 +142,9 @@ And a example model file:
 
 ### funcContext (`Mixed`)
 
-Default: `false`. This option will set the context for a executed function. You
-can set it to whatever, a `String`, `Function`, etc. It will be available to the
-executed function as `this`. For example:
+Default: The executed function's context. This option will set the context for a
+executed function. You can set it to whatever, a `String`, `Object` or
+Function`. It will be available to the executed function as `this`. For example:
 
     const App = ekso([
       {
