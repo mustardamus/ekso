@@ -144,7 +144,8 @@ And a example model file:
 
 Default: The executed function's context. This option will set the context for a
 executed function. You can set it to whatever, a `String`, `Object` or
-Function`. It will be available to the executed function as `this`. For example:
+`Function`. It will be available to the executed function as `this`. For
+example:
 
     const App = ekso([
       {
@@ -162,11 +163,43 @@ And a example model file:
 
 ### nameTransforms (`Array`)
 
-Default: `[]`.
+Default: `[]`. This will transform the last part of the path, ie the filename.
+Multiple transform can be combined. For example:
+
+    const App = ekso([
+      {
+        path: 'examples/mvc/controllers',
+        nameTransforms: ['camelCase', 'capitalize']
+      }
+    ])
+
+That would first transform the filename to `kebabCase` and then `capitalize` it.
+
+For example, given there is a controller file `users_controller.js` it would
+result in the path `App.examples.mvc.controllers.UserController`.
+
+Built-in transforms are:
+
+* `lowerCase`: `FILENAME` -> `filename`
+* `upperCase`: `filename` -> `FILENAME`
+* `snakeCase`: `file-name` -> `file_name`
+* `camelCase`: `file-name` -> `fileName`
+* `kebabCase`: `file_name` -> `file-name`
+* `capitalize`: `filename` -> `Filename`
 
 ### pathTransforms (`Array`)
 
-Default: `[]`.
+Default: `[]`. Very much like the `nameTransforms` option, but it will apply
+every defined transform to every part of the path. For example:
+
+    const App = ekso([
+      {
+        path: 'examples/mvc/helpers',
+        pathTransforms: ['capitalize']
+      }
+    ])
+
+That would result in the path `App.Examples.Mvc.Helpers.filename`.
 
 ### namePrefix (`String`)
 
