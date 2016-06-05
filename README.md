@@ -277,7 +277,7 @@ with `App.examples.mvc.models.User`, but also via `User` from anywhere else.
 
 ## Testing & Linting
 
-All options are covered by tests. Run them with:
+All options are covered by [tests](/test/tests.js). Run them with:
 
     npm test
 
