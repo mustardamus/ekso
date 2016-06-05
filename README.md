@@ -175,8 +175,8 @@ Multiple transform can be combined. For example:
 
 That would first transform the filename to `kebabCase` and then `capitalize` it.
 
-For example, given there is a controller file `users_controller.js` it would
-result in the path `App.examples.mvc.controllers.UserController`.
+For example, given there is a controller file `users_controller.js`, it would
+result in the path `App.examples.mvc.controllers.UsersController`.
 
 Built-in transforms are:
 
@@ -189,8 +189,8 @@ Built-in transforms are:
 
 ### pathTransforms (`Array`)
 
-Default: `[]`. Very much like the `nameTransforms` option, but it will apply
-every defined transform to every part of the path. For example:
+Default: `[]`. Just like the `nameTransforms` option, but it will apply every
+defined transform to every part of the path, except the last one. For example:
 
     const App = ekso([
       {
@@ -203,19 +203,40 @@ That would result in the path `App.Examples.Mvc.Helpers.filename`.
 
 ### namePrefix (`String`)
 
-Default: ''''.
+Default: `''`. This will prefix a `String` to the last part of the path, ie the
+filename. For example:
+
+    const App = ekso([
+      {
+        path: 'examples/mvc/controllers',
+        namePrefix: 'awesome_'
+      }
+    ])
+
+For example, given there is a controller file `users_controller.js`, it would
+result in the path `App.examples.mvc.controllers.awesome_users_controller`.
 
 ### namePostfix (`String`)
 
-Default: `''`.
+Default: `''`. Just like the `namePrefix` option, but the `String` is appended.
 
 ### pathPrefix (`String`)
 
-Default: `''`.
+Default: `''`. Just like the `namePrefix` option, but the `String` prefixed to
+every part of the path, except the last one. For example:
+
+    const App = ekso([
+      {
+        path: 'examples/mvc/helpers',
+        pathPrefix: 'x_'
+      }
+    ])
+
+That would result in the path `App.x_example.x_mvc.x_helpers.filename`.
 
 ### pathPostfix (`String`)
 
-Default: `''`.
+Default: `''`. Just like the `pathPrefix` option, but the `String` is appended.
 
 ### global (`Boolean`)
 
