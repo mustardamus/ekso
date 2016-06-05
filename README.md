@@ -274,3 +274,13 @@ filename global. Again, use with caution. For example:
 
 Given that we have a model file `User.js`, you can access it in the same file
 with `App.examples.mvc.models.User`, but also via `User` from anywhere else.
+
+## Testing & Linting
+
+All options are covered by tests. Run them with:
+
+    npm test
+
+To see if everything is linting just fine, run:
+
+    npm run lint
