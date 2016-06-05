@@ -1,7 +1,7 @@
 {
   "name": "ekso",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Ekso is a little utility to `require` entire directory structures, modify the naming and initilization, and spit ou an `Object` for further usage. It supports CoffeeScript out of the box.",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha test/test.js",
