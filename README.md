@@ -51,6 +51,11 @@ Or:
       'examples/mvc/controllers'
     ])
 
+## Example
+
+Find a simple MVC structure in
+[./examples/mvc/index.js](/examples/mvc/index.js).
+
 ## Overwriting Global Options with Local Options
 
 There are various options to modify how directories and files are required
