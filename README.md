@@ -240,8 +240,32 @@ Default: `''`. Just like the `pathPrefix` option, but the `String` is appended.
 
 ### global (`Boolean`)
 
-Default: `false`.
+Default: `false`. This will make the path globally available. They say that you
+shouldn't pollute the global namespace. But since you are a rebel anyway, do it
+if it fits your need. Just be careful that you are not overwriting already
+defined namespaces. For example:
+
+    const App = ekso([
+      {
+        path: 'examples/mvc/helpers',
+        global: true
+      }
+    ])
+
+Now you could access the helpers via `App.examples.mvc.helpers` in the same
+file, but also via `examples.mvc.helpers` from anywhere else.
 
 ### globalLast (`Boolean`)
 
-Default: `false`.
+Default: `false`. This option will make the last part of the path, ie the
+filename global. Again, use with caution. For example:
+
+    const App = ekso([
+      {
+        path: 'examples/mvc/models',
+        globalLast: true
+      }
+    ])
+
+Given that we have a model file `User.js`, you can access it in the same file
+with `App.examples.mvc.models.User`, but also via `User` from anywhere else.
