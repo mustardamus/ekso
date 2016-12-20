@@ -95,10 +95,12 @@ Default: `process.cwd()`. The path of the root directory. Without any further
 path definitions the whole directory is required. If you specify paths, then
 they are relative to the root directory.
 
-### excludeDirs (`Array`)
+### excludePaths (`Array`)
 
-Default: `['node_modules']`. Directories in this `Array` will not be processed,
-either you `require` the whole root directory or specific paths.
+Default: `['**/node_modules/**']`. Directories in this `Array` will not be
+processed, either you `require` the whole root directory or specific paths. The
+[minimatch](https://github.com/isaacs/minimatch) library is used to match paths,
+so you can use wildcards.
 
 ### globalRequire (`Object`)
 

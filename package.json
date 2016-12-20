@@ -4,7 +4,11 @@
   "description": "Ekso is a little utility to require entire directory structures, modify the naming and initilization, and spit ou an Object for further usage. It supports CoffeeScript out of the box.",
   "author": "Sebastian Senf <contact@mustardamus.com>",
   "license": "MIT",
-  "keywords": ["require", "structure", "directories"],
+  "keywords": [
+    "require",
+    "structure",
+    "directories"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha test/test.js",
@@ -17,7 +21,8 @@
   "dependencies": {
     "coffee-script": "^1.10.0",
     "globby": "^4.0.0",
-    "lodash": "^4.6.1"
+    "lodash": "^4.6.1",
+    "minimatch": "^3.0.3"
   },
   "devDependencies": {
     "mocha": "^2.4.5",
