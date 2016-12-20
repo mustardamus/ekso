@@ -1,6 +1,6 @@
 {
   "name": "ekso",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Ekso is a little utility to require entire directory structures, modify the naming and initilization, and spit ou an Object for further usage. It supports CoffeeScript out of the box.",
   "author": "Sebastian Senf <contact@mustardamus.com>",
   "license": "MIT",
