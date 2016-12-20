@@ -20,12 +20,12 @@
   },
   "dependencies": {
     "coffee-script": "^1.10.0",
-    "globby": "^4.0.0",
+    "globby": "^6.1.0",
     "lodash": "^4.6.1",
     "minimatch": "^3.0.3"
   },
   "devDependencies": {
-    "mocha": "^2.4.5",
-    "standard": "^6.0.8"
+    "mocha": "^3.2.0",
+    "standard": "^8.6.0"
   }
 }
